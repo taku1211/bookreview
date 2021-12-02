@@ -29,7 +29,7 @@ function debugLogStart(){
 //セッション準備・セッションの有効期限を延ばす
 //==========================================
 //RedisTOGOへ接続
-$url = parse_url(getenv('REDISTOGO_URL'));
+$url = parse_url(getenv('REDIS_URL'));
 $host = $url['host'];
 $port = $url['port'];
 $password = $url['pass'];
