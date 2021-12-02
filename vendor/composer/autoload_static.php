@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit44c3a73c4cb1ebc54293f387657e4bfd
 {
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -13,6 +27,8 @@ class ComposerStaticInit44c3a73c4cb1ebc54293f387657e4bfd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit44c3a73c4cb1ebc54293f387657e4bfd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit44c3a73c4cb1ebc54293f387657e4bfd::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit44c3a73c4cb1ebc54293f387657e4bfd::$classMap;
 
         }, null, ClassLoader::class);

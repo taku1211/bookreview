@@ -29,8 +29,11 @@ function debugLogStart(){
 //セッション準備・セッションの有効期限を延ばす
 //==========================================
 //RedisTOGOへ接続
-$redisUrl = parse_url(getenv('REDISTOGO_URL'));
-$redisServer = sprintf('tcp://%s:%d?auth=%s', $redisUrl['host'], $redisUrl['port'], $RedisUrl['pass']);
+$url = parse_url(getenv('REDISTOGO_URL'));
+$host = $url['host'];
+$port = $url['port'];
+$password = $url['pass'];
+$redis = new Predis\Client(getenv('REDIS_URL'));
 ini_set('session.save_handler', 'redis');
 ini_set('session.save_path', $redisServer);
 //セッションファイルの置き場所を変更する
