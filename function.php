@@ -198,9 +198,11 @@ function sanitize($str){
 function dbConnect(){
 
   //DBへの接続準備
-  $dbn = 'mysql://bd393efc82ad40:5257982c@us-cdbr-east-04.cleardb.com/heroku_402446adb048d34?reconnect=true';
-  $user = 'bd393efc82ad40';
-  $password = '5257982c';
+  $db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
+  $db['dbname'] = ltrim($db['path'], '/');
+  $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+  $user = $db['user'];
+  $password = $db['pass'];
   $options = array(
     //SQL実行失敗時にはエラーコードのみ設定
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
