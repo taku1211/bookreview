@@ -198,9 +198,9 @@ function sanitize($str){
 function dbConnect(){
 
   //DBへの接続準備
-  $dbn = 'mysql:dbname=bookreview;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = 'root';
+  $dbn = 'mysql://bd393efc82ad40:5257982c@us-cdbr-east-04.cleardb.com/heroku_402446adb048d34?reconnect=true';
+  $user = ' bd393efc82ad40';
+  $password = '5257982c';
   $options = array(
     //SQL実行失敗時にはエラーコードのみ設定
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
