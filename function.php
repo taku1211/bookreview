@@ -1,9 +1,10 @@
 <?php
 //ログをとるかどうか
-ini_set('log_errors', 'on');
+//ini_set('log_errors', 'on');
 //ログの出六ファイルを指定
-ini_set('error_log', 'php.log');
-
+//ini_set('error_log', 'php.log');
+error_reporting(E_ALL);
+ini_set("display_errors", 1)
 //==============================
 //デバッグ関数
 //==============================
