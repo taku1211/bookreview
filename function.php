@@ -28,8 +28,13 @@ function debugLogStart(){
 //===========================================
 //セッション準備・セッションの有効期限を延ばす
 //==========================================
+//RedisTOGOへ接続
+$redisUrl = parse_url(getenv('REDISTOGO_URL'));
+$redisServer = sprintf('tcp://%s:%d?auth=%s', $redisUrl['host'], $redisUrl['port'], $RedisUrl['pass']);
+ini_set('session.save_handler', 'redis');
+ini_set('session.save_path', $redisServer);
 //セッションファイルの置き場所を変更する
-session_save_path("C:\WINDOWS\Temp");
+//session_save_path("C:\WINDOWS\Temp");
 //ガベージコレクションが削除するセッションの有効期限を設定（30日以上経過しているものに対してのみ１００分の１の確率で削除）
 ini_set('session.gc_maxlifetime', 60*60*24*30);
 //ブラウザを閉じてもクッキーが削除されないようにクッキー自体の有効期限を延ばす
