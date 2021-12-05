@@ -18,6 +18,7 @@ use Predis\ClientInterface;
  * HSCAN command (Redis >= 2.8) wrapped in a fully-rewindable PHP iterator.
  *
  * @author Daniele Alessandri <suppakilla@gmail.com>
+ *
  * @link http://redis.io/commands/scan
  */
 class HashKey extends CursorBasedIterator
@@ -50,6 +51,8 @@ class HashKey extends CursorBasedIterator
     protected function extractNext()
     {
         $this->position = key($this->elements);
-        $this->current = array_shift($this->elements);
+        $this->current = current($this->elements);
+
+        unset($this->elements[$this->position]);
     }
 }

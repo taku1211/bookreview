@@ -11,8 +11,6 @@
 
 namespace Predis\Response\Iterator;
 
-use Iterator;
-use Countable;
 use Predis\Response\ResponseInterface;
 
 /**
@@ -27,7 +25,7 @@ use Predis\Response\ResponseInterface;
  *
  * @author Daniele Alessandri <suppakilla@gmail.com>
  */
-abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterface
+abstract class MultiBulkIterator implements \Iterator, \Countable, ResponseInterface
 {
     protected $current;
     protected $position;
@@ -36,6 +34,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         // NOOP
@@ -44,6 +43,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->current;
@@ -52,6 +52,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->position;
@@ -60,6 +61,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         if (++$this->position < $this->size) {
@@ -70,6 +72,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->position < $this->size;
@@ -84,6 +87,7 @@ abstract class MultiBulkIterator implements Iterator, Countable, ResponseInterfa
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->size;

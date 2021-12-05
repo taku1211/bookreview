@@ -2,6 +2,6 @@
     "require": {
       "php": "~7.0",
       "ext-mbstring": "*",
-      "predis/predis": "1.0.1"
+      "predis/predis": "^1.1"
     }
  }

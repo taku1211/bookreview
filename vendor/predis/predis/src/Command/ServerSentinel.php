@@ -13,6 +13,7 @@ namespace Predis\Command;
 
 /**
  * @link http://redis.io/topics/sentinel
+ *
  * @author Daniele Alessandri <suppakilla@gmail.com>
  */
 class ServerSentinel extends Command
@@ -30,7 +31,10 @@ class ServerSentinel extends Command
      */
     public function parseResponse($data)
     {
-        switch (strtolower($this->getArgument(0))) {
+        $argument = $this->getArgument(0);
+        $argument = is_null($argument) ? null : strtolower($argument);
+
+        switch ($argument) {
             case 'masters':
             case 'slaves':
                 return self::processMastersOrSlaves($data);
@@ -53,7 +57,7 @@ class ServerSentinel extends Command
             $processed = array();
             $count = count($node);
 
-            for ($i = 0; $i < $count; $i++) {
+            for ($i = 0; $i < $count; ++$i) {
                 $processed[$node[$i]] = $node[++$i];
             }
 

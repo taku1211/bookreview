@@ -11,9 +11,6 @@
 
 namespace Predis\Command\Processor;
 
-use ArrayAccess;
-use ArrayIterator;
-use InvalidArgumentException;
 use Predis\Command\CommandInterface;
 
 /**
@@ -21,7 +18,7 @@ use Predis\Command\CommandInterface;
  *
  * @author Daniele Alessandri <suppakilla@gmail.com>
  */
-class ProcessorChain implements ArrayAccess, ProcessorInterface
+class ProcessorChain implements \ArrayAccess, ProcessorInterface
 {
     private $processors = array();
 
@@ -58,7 +55,7 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
      */
     public function process(CommandInterface $command)
     {
-        for ($i = 0; $i < $count = count($this->processors); $i++) {
+        for ($i = 0; $i < $count = count($this->processors); ++$i) {
             $this->processors[$i]->process($command);
         }
     }
@@ -74,11 +71,11 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
     /**
      * Returns an iterator over the list of command processor in the chain.
      *
-     * @return ArrayIterator
+     * @return \Traversable<int, ProcessorInterface>
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->processors);
+        return new \ArrayIterator($this->processors);
     }
 
     /**
@@ -92,8 +89,9 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($index)
     {
         return isset($this->processors[$index]);
@@ -102,6 +100,7 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($index)
     {
         return $this->processors[$index];
@@ -110,11 +109,12 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($index, $processor)
     {
         if (!$processor instanceof ProcessorInterface) {
-            throw new InvalidArgumentException(
-                "A processor chain accepts only instances of ".
+            throw new \InvalidArgumentException(
+                'A processor chain accepts only instances of '.
                 "'Predis\Command\Processor\ProcessorInterface'."
             );
         }
@@ -125,6 +125,7 @@ class ProcessorChain implements ArrayAccess, ProcessorInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($index)
     {
         unset($this->processors[$index]);

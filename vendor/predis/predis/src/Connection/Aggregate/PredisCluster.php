@@ -11,23 +11,21 @@
 
 namespace Predis\Connection\Aggregate;
 
-use ArrayIterator;
-use Countable;
-use IteratorAggregate;
-use Predis\NotSupportedException;
 use Predis\Cluster\PredisStrategy;
 use Predis\Cluster\StrategyInterface;
 use Predis\Command\CommandInterface;
 use Predis\Connection\NodeConnectionInterface;
+use Predis\NotSupportedException;
 
 /**
  * Abstraction for a cluster of aggregate connections to various Redis servers
  * implementing client-side sharding based on pluggable distribution strategies.
  *
  * @author Daniele Alessandri <suppakilla@gmail.com>
+ *
  * @todo Add the ability to remove connections from pool.
  */
-class PredisCluster implements ClusterInterface, IteratorAggregate, Countable
+class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
 {
     private $pool;
     private $strategy;
@@ -178,19 +176,21 @@ class PredisCluster implements ClusterInterface, IteratorAggregate, Countable
     }
 
     /**
-     * {@inheritdoc}
+     * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->pool);
     }
 
     /**
-     * {@inheritdoc}
+     * @return \Traversable<string|int, NodeConnectionInterface>
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
-        return new ArrayIterator($this->pool);
+        return new \ArrayIterator($this->pool);
     }
 
     /**
