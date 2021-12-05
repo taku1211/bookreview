@@ -4,7 +4,7 @@
 //ログの出六ファイルを指定
 //ini_set('error_log', 'php.log');
 error_reporting(E_ALL);
-ini_set("display_errors", 1)
+ini_set("display_errors", 1);
 //==============================
 //デバッグ関数
 //==============================
