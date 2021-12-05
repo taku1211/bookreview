@@ -36,7 +36,7 @@ $port = $url['port'];
 $password = $url['pass'];
 $redis = new Predis\Client(getenv('REDIS_URL'));
 ini_set('session.save_handler', 'redis');
-ini_set('session.save_path', $redisServer);
+ini_set('session.save_path', $url);
 //セッションファイルの置き場所を変更する
 //session_save_path("C:\WINDOWS\Temp");
 //ガベージコレクションが削除するセッションの有効期限を設定（30日以上経過しているものに対してのみ１００分の１の確率で削除）
