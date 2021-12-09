@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6167930cfeb4bee86b011ff7c81e61b4",
+    "content-hash": "d321d4b7cd26edd04dd1eee417ea4b0f",
     "packages": [
         {
             "name": "predis/predis",
-            "version": "v1.1.x-dev",
+            "version": "v1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "5e07be785aff5a6cde64445ccdee636d89fdd1fe"
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/5e07be785aff5a6cde64445ccdee636d89fdd1fe",
-                "reference": "5e07be785aff5a6cde64445ccdee636d89fdd1fe",
+                "url": "https://api.github.com/repos/predis/predis/zipball/c50c3393bb9f47fa012d0cdfb727a266b0818259",
+                "reference": "c50c3393bb9f47fa012d0cdfb727a266b0818259",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v1.1"
+                "source": "https://github.com/predis/predis/tree/v1.1.9"
             },
             "funding": [
                 {
@@ -70,15 +70,13 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-01T18:18:59+00:00"
+            "time": "2021-10-05T19:02:38+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "predis/predis": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

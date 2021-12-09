@@ -30,13 +30,12 @@ function debugLogStart(){
 //セッション準備・セッションの有効期限を延ばす
 //==========================================
 //RedisTOGOへ接続
-$url = parse_url(getenv('REDIS_URL'));
-$host = $url['host'];
-$port = $url['port'];
-$password = $url['pass'];
-$redis = new Predis\Client(getenv('REDIS_URL'));
-ini_set('session.save_handler', 'redis');
-ini_set('session.save_path', $url);
+$redis_url = "tcp://" . parse_url($_ENV['REDISTOGO_URL'], PHP_URL_HOST) . ":" . parse_url($_ENV['REDISTOGO_URL'], PHP_URL_PORT);
+if (!is_array(parse_url($_ENV['REDISTOGO_URL'], PHP_URL_PASS))) {
+  $redis_url .= "?auth=" . parse_url($_ENV['REDISTOGO_URL'], PHP_URL_PASS);
+}
+ini_set("session.save_path", $redis_url);
+ini_set("session.save_handler", "redis");
 //セッションファイルの置き場所を変更する
 //session_save_path("C:\WINDOWS\Temp");
 //ガベージコレクションが削除するセッションの有効期限を設定（30日以上経過しているものに対してのみ１００分の１の確率で削除）
