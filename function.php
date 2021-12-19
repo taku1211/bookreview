@@ -30,16 +30,18 @@ function debugLogStart(){
 //セッション準備・セッションの有効期限を延ばす
 //==========================================
 //RedisTOGOへ接続
-$url = parse_url(getenv('REDISTOGO_URL'));
-$redisServer = sprintf('tcp://%s:%d?auth=%s', $url['host'], $url['port'], $url['pass']);
-ini_set("session.save_path", $redisServer);
-ini_set("session.save_handler", "redis");
+ini_set('session.save_handler', 'memcached');
+ini_set('session.save_path', 'PERSISTENT=pool ' . getenv('MEMCACHIER_SERVERS'));
+ini_set('memcached.sess_binary', 1);
+ini_set('memcached.sess_sasl_username', getenv('MEMCACHIER_USERNAME'));
+ini_set('memcached.sess_sasl_password', getenv('MEMCACHIER_PASSWORD'));
+
 //セッションファイルの置き場所を変更する
 //session_save_path("C:\WINDOWS\Temp");
 //ガベージコレクションが削除するセッションの有効期限を設定（30日以上経過しているものに対してのみ１００分の１の確率で削除）
-ini_set('session.gc_maxlifetime', 60*60*24*30);
+//ini_set('session.gc_maxlifetime', 60*60*24*30);
 //ブラウザを閉じてもクッキーが削除されないようにクッキー自体の有効期限を延ばす
-ini_set('session.cookie_lifetime', 60*60*24*30);
+//ini_set('session.cookie_lifetime', 60*60*24*30);
 //セッションを使う
 session_start();
 //現在のセッションを新しく生成したものと置き換える（なりすましの防止）
